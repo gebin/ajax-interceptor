@@ -13,7 +13,7 @@ let ajax_interceptor_qoweifjqon = {
       // 对比是否满足指定的规则
       [
         {
-          match: "https://open.che300.com/api/brands/query"
+          match: "https://im.mafengwo.cn/admin/chat/message_post"
         },
         {
           match: "https://im.mafengwo.cn/admin/chat/polling"
@@ -22,12 +22,13 @@ let ajax_interceptor_qoweifjqon = {
         if (match && this.responseURL.indexOf(match) > -1) {
           if (this.response) {
             // 继续判断是不是符合要求，比如某个字段
-            let line_id = '',
-              name = '';
+            // let line_id = '';
+            // let  name = '';
 
-            line_id = this.response.data.list[0].item.info.line_id;
-            name = this.response.data.list[0].item.name;
+            // line_id = this.response.data.list[0].item.info.line_id;
+            // name = this.response.data.list[0].item.name;
             debugger;
+
             // $.ajax({
             //   url: "https://im.mafengwo.cn/rest/im/event/",
             //   method: "post",
@@ -60,25 +61,28 @@ let ajax_interceptor_qoweifjqon = {
             //   },
             //   fail: function() {}
             // });
-            if(name === 'message_new'){
-              $.ajax({
-                url: "https://im.mafengwo.cn/admin/chat/message_post",
-                method: "post",
-                data: {
-                  line_id:line_id,
-                  message:{
-                    type:1,
-                    content:{
-                      text : '好的'
-                    }
-                  }
-                },
-                success: function(res) {
-                  console.log(res);
-                },
-                fail: function() {}
-              });
-            }
+
+            // if(name === 'message_new'){
+            //   var replyT = setTimeout(function(){
+            //     $.ajax({
+            //       url: "https://im.mafengwo.cn/admin/chat/message_post",
+            //       method: "post",
+            //       data: {
+            //         line_id:line_id,
+            //         message:{
+            //           type:1,
+            //           content:{
+            //             text : '好的'
+            //           }
+            //         }
+            //       },
+            //       success: function(res) {
+            //         console.log(res);
+            //       },
+            //       fail: function() {}
+            //     });
+            //   },3000)
+            // }
           }
 
           if (!pageScriptEventDispatched) {
