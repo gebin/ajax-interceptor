@@ -258,7 +258,6 @@
         ]
     }
 }
-
 // 发送消息返回值
 {
     "errno": 0,
@@ -274,4 +273,231 @@
         "line_id": "2006490303",
         "busi_type": 2
     }
+}
+
+
+// https://im.mafengwo.cn/admin/chat/get_ongoing_list
+
+{
+    "errno": 0,
+    "error": "",
+    "data": [
+        {
+            "id": 531554682,
+            "line_id": 2006492721,
+            "c_uid": 89382479,
+            "content": {
+                "type": 9,
+                "typeinfo": {
+                    "ota_id": 52214
+                }
+            },
+            "group_id": 4941,
+            "alloced_uid": 40081019,
+            "is_alloced": 2,
+            "alloced_time": "2019-09-19 22:30:11",
+            "is_resolved": 0,
+            "resolved_uid": 0,
+            "resolved_time": "2019-09-19 22:29:29",
+            "read_mid": 2466965050,
+            "last_msg_id": 2466965046,
+            "unread_num": 0,
+            "is_top": 0,
+            "top_time": "2019-09-19 22:29:29",
+            "nick_name": "",
+            "remark": "",
+            "ctime": "2019-09-19 22:29:29",
+            "b_uid": 40081019,
+            "ota_id": "52214",
+            "unread": 0,
+            "type": 9,
+            "typeinfo": {
+                "ota_id": 52214
+            },
+            "status_text": "\u4f60\u597d",
+            "thread_id": 2006492721,
+            "bind_time": "2019-09-19 22:30:11",
+            "status": 0,
+            "convert_info": [],
+            "sub_type": 0,
+            "c_ip": "117.62.231.107",
+            "channel": 2,
+            "channel_id": {
+                "device_model": "PCT-AL10",
+                "lv": 1
+            },
+            "c_first_msg_time": "2019-09-19 22:30:11",
+            "c_last_msg_time": "2019-09-19 22:30:11",
+            "b_last_msg_time": "2019-09-19 22:30:11",
+            "c_last_msg_id": 2466965046,
+            "is_timeout": 0,
+            "c_user": {
+                "uid": 89382479,
+                "user_name": "\u9a6c\u8702\u7a9d\u7528\u6237",
+                "user_avatar": "https:\/\/n2-q.mafengwo.net\/s12\/M00\/35\/2C\/wKgED1uqImOAAxCCAAAeJTVWYJU680.png?imageMogr2%2Fthumbnail%2F%21192x192r%2Fgravity%2FCenter%2Fcrop%2F%21192x192%2Fquality%2F90",
+                "real_name": "\u9a6c\u8702\u7a9d\u7528\u6237"
+            },
+            "show_type": "\u5e97\u94fa",
+            "b_user": {
+                "uid": 40081019,
+                "user_name": "IM",
+                "b_name": "IM",
+                "group_id": 4941,
+                "user_avatar": "https:\/\/b3-q.mafengwo.net\/s11\/M00\/3F\/A0\/wKgBEFpW-E-APQdWAAAH1mlxODA28.jpeg?imageMogr2%2Fthumbnail%2F%21192x192r%2Fgravity%2FCenter%2Fcrop%2F%21192x192%2Fquality%2F90"
+            },
+            "resolved_bname": null,
+            "colormarks": [],
+            "is_focus": false,
+            "orderInfo": {
+                "flag": 0,
+                "status": ""
+            },
+            "ip_location": "\u4e2d\u56fd \u6c5f\u82cf \u5357\u4eac"
+        },
+        {
+            "id": 531537867,
+            "line_id": 2006490303,
+            "c_uid": 93801945,
+            "content": {
+                "type": 5,
+                "typeinfo": {
+                    "sales": 2286519
+                }
+            },
+            "group_id": 4941,
+            "alloced_uid": 40081019,
+            "is_alloced": 2,
+            "alloced_time": "2019-09-19 21:54:13",
+            "is_resolved": 0,
+            "resolved_uid": 0,
+            "resolved_time": "2019-09-19 21:52:24",
+            "read_mid": 2466983315,
+            "last_msg_id": 2466962032,
+            "unread_num": 0,
+            "is_top": 0,
+            "top_time": "2019-09-19 21:52:24",
+            "nick_name": "",
+            "remark": "",
+            "ctime": "2019-09-19 21:52:24",
+            "b_uid": 40081019,
+            "ota_id": "52214",
+            "unread": 0,
+            "type": 5,
+            "typeinfo": {
+                "sales": 2286519
+            },
+            "status_text": "\u597d\u7684",
+            "thread_id": 2006490303,
+            "bind_time": "2019-09-19 21:54:13",
+            "status": 0,
+            "convert_info": [],
+            "sub_type": 0,
+            "c_ip": "117.62.231.107",
+            "channel": 2,
+            "channel_id": {
+                "device_model": "PCT-AL10",
+                "lv": 2
+            },
+            "c_first_msg_time": "2019-09-19 21:54:13",
+            "c_last_msg_time": "2019-09-19 22:26:05",
+            "b_last_msg_time": "2019-09-19 22:56:36",
+            "c_last_msg_id": 2466962032,
+            "is_timeout": 0,
+            "c_user": {
+                "uid": 93801945,
+                "user_name": "\u845b\u5f6c",
+                "user_avatar": "https:\/\/n3-q.mafengwo.net\/s12\/M00\/35\/6C\/wKgED1uqIpCARLIhAAAZUeRPlFM676.png?imageMogr2%2Fthumbnail%2F%21192x192r%2Fgravity%2FCenter%2Fcrop%2F%21192x192%2Fquality%2F90",
+                "real_name": "\u845b\u5f6c"
+            },
+            "show_type": "\u4ea7\u54c1",
+            "b_user": {
+                "uid": 40081019,
+                "user_name": "IM",
+                "b_name": "IM",
+                "group_id": 4941,
+                "user_avatar": "https:\/\/b3-q.mafengwo.net\/s11\/M00\/3F\/A0\/wKgBEFpW-E-APQdWAAAH1mlxODA28.jpeg?imageMogr2%2Fthumbnail%2F%21192x192r%2Fgravity%2FCenter%2Fcrop%2F%21192x192%2Fquality%2F90"
+            },
+            "resolved_bname": null,
+            "colormarks": [],
+            "is_focus": false,
+            "orderInfo": {
+                "flag": 0,
+                "status": ""
+            },
+            "ip_location": "  "
+        },
+        {
+            "id": 400333493,
+            "line_id": 2004145133,
+            "c_uid": 42139406,
+            "content": {
+                "type": "2",
+                "typeinfo": {
+                    "fit_order": "22014172019081217543040"
+                }
+            },
+            "group_id": 4941,
+            "alloced_uid": 40081019,
+            "is_alloced": 2,
+            "alloced_time": "2019-09-19 21:54:06",
+            "is_resolved": 0,
+            "resolved_uid": 44627490,
+            "resolved_time": "2019-08-12 21:34:18",
+            "read_mid": 2466945255,
+            "last_msg_id": 2466940665,
+            "unread_num": 0,
+            "is_top": 0,
+            "top_time": "2019-07-09 17:52:13",
+            "nick_name": "",
+            "remark": "",
+            "ctime": "2019-07-09 17:52:13",
+            "b_uid": 40081019,
+            "ota_id": "52214",
+            "unread": 0,
+            "type": "2",
+            "typeinfo": {
+                "fit_order": "22014172019081217543040"
+            },
+            "status_text": "\u597d\u7684",
+            "thread_id": 2004145133,
+            "bind_time": "2019-09-19 21:54:06",
+            "status": 0,
+            "convert_info": [],
+            "sub_type": 0,
+            "c_ip": "115.171.84.21",
+            "channel": 2,
+            "channel_id": {
+                "device_model": "iPhone9,2",
+                "lv": 5
+            },
+            "c_first_msg_time": "2019-09-19 21:54:06",
+            "c_last_msg_time": "2019-09-19 21:56:37",
+            "b_last_msg_time": "2019-09-19 22:02:47",
+            "c_last_msg_id": 2466940665,
+            "is_timeout": 0,
+            "c_user": {
+                "uid": 42139406,
+                "user_name": "hua",
+                "user_avatar": "https:\/\/b3-q.mafengwo.net\/s12\/M00\/41\/B5\/wKgED1wKVhyAUizrAACW99FiT-801.jpeg?imageMogr2%2Fthumbnail%2F%21192x192r%2Fgravity%2FCenter%2Fcrop%2F%21192x192%2Fquality%2F90",
+                "real_name": "hua"
+            },
+            "show_type": "\u8ba2\u5355",
+            "b_user": {
+                "uid": 40081019,
+                "user_name": "IM",
+                "b_name": "IM",
+                "group_id": 4941,
+                "user_avatar": "https:\/\/b3-q.mafengwo.net\/s11\/M00\/3F\/A0\/wKgBEFpW-E-APQdWAAAH1mlxODA28.jpeg?imageMogr2%2Fthumbnail%2F%21192x192r%2Fgravity%2FCenter%2Fcrop%2F%21192x192%2Fquality%2F90"
+            },
+            "resolved_bname": "\u5ba2\u670d-\u96c5\u9759",
+            "colormarks": [],
+            "is_focus": false,
+            "orderInfo": {
+                "flag": 2,
+                "status": "\u8ba2\u5355\u5df2\u4ed8",
+                "order_id": null
+            },
+            "ip_location": "\u4e2d\u56fd \u5317\u4eac \u5317\u4eac"
+        }
+    ]
 }
