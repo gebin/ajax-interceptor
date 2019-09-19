@@ -92,15 +92,15 @@ window.addEventListener("pageScript", function(event) {
   }
 }, false);
 
-// window.addEventListener("message", function(event) {
-// console.log(event.data)
-// }, false);
+window.addEventListener("message", function(event) {
+console.log(event.data)
+}, false);
 
-// window.parent.postMessage({ type: "CONTENT", text: "Hello from the webpage!" }, "*");
+window.parent.postMessage({ type: "CONTENT", text: "Hello from the webpage!" }, "*");
 
 
-// var s = document.createElement('script');
-// s.setAttribute('type', 'text/javascript');
-// s.innerText = `console.log('test')`;
-// document.documentElement.appendChild(s);
+var s = document.createElement('script');
+s.setAttribute('type', 'text/javascript');
+s.innerText = `console.log('test')`;
+document.documentElement.appendChild(s);
 

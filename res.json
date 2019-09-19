@@ -1,0 +1,260 @@
+{
+    "errno": 0,
+    "error": 0,
+    "data": {
+        "list": [
+            {
+                "item": {
+                    "name": "message_new",
+                    "info": {
+                        "line_id": 2006490303,
+                        "classify": "common",
+                        "timestamp": 1568901253,
+                        "data": {
+                            "msg_id": 2466938899,
+                            "content": {
+                                "type": 13,
+                                "data": {
+                                    "uid": 93801945,
+                                    "from": "当地游",
+                                    "price": 998,
+                                    "share_type": "一日游",
+                                    "share_from": "",
+                                    "title": "1元换购|搭配高额减 凯恩斯 银梭号阿金考特外海大堡礁一日游 （酒店接送+直升机+含海鲜自助午餐+下午茶+海底漫步+深潜+浮潜+加跳伞等减）",
+                                    "description": "这个旅行产品看起来很不错呦，超值有品质，自由有保障，你也快来看看吧！",
+                                    "url": "https://m.mafengwo.cn/sales/2286519.html",
+                                    "from_id": 2286519,
+                                    "image": {
+                                        "oimg": "https://p2-q.mafengwo.net/s14/M00/5A/9D/wKgE2l1wdsqASolxAARpNqz8dK481.jpeg?imageMogr2%2Fauto-orient",
+                                        "id": "mfwStorage14/M00/5A/9D/wKgE2l1wdsqASolxAARpNqz8dK481.jpeg",
+                                        "bimg": "https://p2-q.mafengwo.net/s14/M00/5A/9D/wKgE2l1wdsqASolxAARpNqz8dK481.jpeg?imageMogr2%2Fthumbnail%2F%21100x100r%2Fauto-orient%2Fgravity%2FCenter%2Fcrop%2F%21100x100%2Fquality%2F100"
+                                    }
+                                }
+                            },
+                            "from_user": {
+                                "uid": 93801945,
+                                "user_name": "葛彬",
+                                "user_avatar": "https://p3-q.mafengwo.net/s12/M00/35/CD/wKgED1uqIt-AG3w5AAAbM62rsh0384.png?imageMogr2%2Fthumbnail%2F%2196x96r%2Fgravity%2FCenter%2Fcrop%2F%2196x96%2Fquality%2F90",
+                                "nick_name": ""
+                            },
+                            "remote_read": 0,
+                            "config": {
+                                "role": 1
+                            },
+                            "share": {
+                                "line_id": 2006490303,
+                                "busi_type": 2,
+                                "object_id": 93801945,
+                                "avatar": "https://b2-q.mafengwo.net/s12/M00/35/B7/wKgED1uqIs-AMYTwAAAX-VIKIo0071.png?imageMogr2%2Fthumbnail%2F%2196x96r%2Fgravity%2FCenter%2Fcrop%2F%2196x96%2Fquality%2F90",
+                                "name": "葛彬"
+                            }
+                        }
+                    },
+                    "push": {
+                        "content": "[用户咨询]葛彬发来一个自由行产品",
+                        "title": "你收到一条用户咨询",
+                        "url": "http://m.mafengwo.cn/nb/public/sharejump.php?type=2000&line_id=2006490303&object_id=52214&busi_type=2&fromuid=93801945&fromuname=%E8%91%9B%E5%BD%AC",
+                        "avatar": "https://p3-q.mafengwo.net/s12/M00/35/CD/wKgED1uqIt-AG3w5AAAbM62rsh0384.png?imageMogr2%2Fthumbnail%2F%2196x96r%2Fgravity%2FCenter%2Fcrop%2F%2196x96%2Fquality%2F90"
+                    }
+                },
+                "busi_type": 2,
+                "id": 1740602907,
+                "timestamp": 1568901253
+            }
+        ]
+    }
+}
+
+{
+    "errno": 0,
+    "error": 0,
+    "data": {
+        "list": [
+            {
+                "item": {
+                    "name": "message_new",
+                    "info": {
+                        "line_id": 2006490303,
+                        "classify": "common",
+                        "timestamp": 1568902471,
+                        "data": {
+                            "msg_id": 2466953981,
+                            "content": {
+                                "type": 1,
+                                "data": {
+                                    "text": "嗯嗯"
+                                }
+                            },
+                            "from_user": {
+                                "uid": 93801945,
+                                "user_name": "葛彬",
+                                "user_avatar": "https://n2-q.mafengwo.net/s12/M00/35/2C/wKgED1uqImOAAxCCAAAeJTVWYJU680.png?imageMogr2%2Fthumbnail%2F%2196x96r%2Fgravity%2FCenter%2Fcrop%2F%2196x96%2Fquality%2F90",
+                                "nick_name": ""
+                            },
+                            "remote_read": 0,
+                            "config": {
+                                "role": 1
+                            },
+                            "share": {
+                                "line_id": 2006490303,
+                                "busi_type": 2,
+                                "object_id": 93801945,
+                                "avatar": "https://n3-q.mafengwo.net/s12/M00/35/6C/wKgED1uqIpCARLIhAAAZUeRPlFM676.png?imageMogr2%2Fthumbnail%2F%2196x96r%2Fgravity%2FCenter%2Fcrop%2F%2196x96%2Fquality%2F90",
+                                "name": "葛彬"
+                            }
+                        }
+                    },
+                    "push": {
+                        "content": "[用户咨询]葛彬:嗯嗯",
+                        "title": "你收到一条用户咨询",
+                        "url": "http://m.mafengwo.cn/nb/public/sharejump.php?type=2000&line_id=2006490303&object_id=52214&busi_type=2&fromuid=93801945&fromuname=%E8%91%9B%E5%BD%AC",
+                        "avatar": "https://n2-q.mafengwo.net/s12/M00/35/2C/wKgED1uqImOAAxCCAAAeJTVWYJU680.png?imageMogr2%2Fthumbnail%2F%2196x96r%2Fgravity%2FCenter%2Fcrop%2F%2196x96%2Fquality%2F90"
+                    }
+                },
+                "busi_type": 2,
+                "id": 9500080511,
+                "timestamp": 1568902471
+            }
+        ]
+    }
+}
+
+
+{
+    "errno": 0,
+    "error": 0,
+    "data": {
+        "list": [
+            {
+                "item": {
+                    "name": "user_refresh",
+                    "info": {
+                        "user": {
+                            "id": 70864600,
+                            "c_uid": 89382479,
+                            "ota_id": 52214,
+                            "b_uid": 40081019,
+                            "status": 1,
+                            "thread_id": 2006492721,
+                            "c_last_msg_id": 2466965046,
+                            "b_last_msg_id": 0,
+                            "is_resolved": 0,
+                            "c_first_msg_time": 1568903411,
+                            "b_first_msg_time": 0,
+                            "c_last_msg_time": 1568903411,
+                            "b_last_msg_time": 0,
+                            "ctime": "2019-09-19 22:29:29",
+                            "connect_time": "2019-09-19 22:30:10",
+                            "status_text": "你好",
+                            "type": 9,
+                            "typeinfo": "{\"otaid\":52214}",
+                            "c_first_msg_id": 2466965046,
+                            "b_first_msg_id": 0,
+                            "c_uuid": "5d8390a5-79bf-9288-ed11-089cbb76c061",
+                            "c_ip": "117.62.231.107",
+                            "resolved_time": "0000-00-00 00:00:00",
+                            "resolved_uid": 0,
+                            "channel": 2,
+                            "channel_id": {
+                                "app_version": "9.3.28",
+                                "channel": "ZhiHuiYun",
+                                "device_id": "D8:9B:3B:17:B9:66",
+                                "device_model": "PCT-AL10",
+                                "os_version": "9",
+                                "user_id": 89382479,
+                                "appname": "蚂蜂窝自由行ANDROID",
+                                "appcode": "com.mfw.roadbook",
+                                "lv": 1
+                            },
+                            "convert_info": false,
+                            "is_top": 0,
+                            "is_top_time": "0000-00-00 00:00:00",
+                            "remark": "",
+                            "bind_time": "2019-09-19 22:30:11",
+                            "nick_name": "",
+                            "sales_id": 0,
+                            "del": 0,
+                            "is_timeout": 0,
+                            "dialogue_id": 2466965046,
+                            "c_read_msg_id": 0,
+                            "b_read_msg_id": 0,
+                            "reply_type": 0,
+                            "is_robot_convert": 0,
+                            "line_id": 2006492721,
+                            "c_user": {
+                                "uid": 89382479,
+                                "user_name": "马蜂窝用户",
+                                "user_avatar": "https://b4-q.mafengwo.net/s12/M00/35/52/wKgED1uqInuAITIBAAAiWI3ZI5o530.png?imageMogr2%2Fthumbnail%2F%2196x96r%2Fgravity%2FCenter%2Fcrop%2F%2196x96%2Fquality%2F90"
+                            },
+                            "b_user": {
+                                "uid": 40081019,
+                                "user_name": "IM",
+                                "user_avatar": "https://b3-q.mafengwo.net/s11/M00/3F/A0/wKgBEFpW-E-APQdWAAAH1mlxODA28.jpeg?imageMogr2%2Fthumbnail%2F%2196x96r%2Fgravity%2FCenter%2Fcrop%2F%2196x96%2Fquality%2F90"
+                            },
+                            "unread": 0,
+                            "is_alloced": 2
+                        }
+                    },
+                    "push": {}
+                },
+                "busi_type": 2,
+                "id": 219018586,
+                "timestamp": 1568903411
+            }
+        ]
+    }
+}
+
+{
+    "errno": 0,
+    "error": 0,
+    "data": {
+        "list": [
+            {
+                "item": {
+                    "name": "message_new",
+                    "info": {
+                        "line_id": 2006492721,
+                        "classify": "common",
+                        "timestamp": 1568903411,
+                        "data": {
+                            "msg_id": 2466965046,
+                            "content": {
+                                "type": 1,
+                                "data": {
+                                    "text": "你好"
+                                }
+                            },
+                            "from_user": {
+                                "uid": 89382479,
+                                "user_name": "马蜂窝用户",
+                                "user_avatar": "https://n2-q.mafengwo.net/s12/M00/35/2C/wKgED1uqImOAAxCCAAAeJTVWYJU680.png?imageMogr2%2Fthumbnail%2F%2196x96r%2Fgravity%2FCenter%2Fcrop%2F%2196x96%2Fquality%2F90",
+                                "nick_name": ""
+                            },
+                            "remote_read": 0,
+                            "config": {
+                                "role": 1
+                            },
+                            "share": {
+                                "line_id": 2006492721,
+                                "busi_type": 2,
+                                "object_id": 89382479,
+                                "avatar": "https://n1-q.mafengwo.net/s12/M00/35/98/wKgED1uqIreAU9QZAAAXHQMBZ74008.png?imageMogr2%2Fthumbnail%2F%2196x96r%2Fgravity%2FCenter%2Fcrop%2F%2196x96%2Fquality%2F90",
+                                "name": "马蜂窝用户"
+                            }
+                        }
+                    },
+                    "push": {
+                        "content": "[用户咨询]马蜂窝用户:你好",
+                        "title": "你收到一条用户咨询",
+                        "url": "http://m.mafengwo.cn/nb/public/sharejump.php?type=2000&line_id=2006492721&object_id=52214&busi_type=2&fromuid=89382479&fromuname=%E9%A9%AC%E8%9C%82%E7%AA%9D%E7%94%A8%E6%88%B7",
+                        "avatar": "https://n2-q.mafengwo.net/s12/M00/35/2C/wKgED1uqImOAAxCCAAAeJTVWYJU680.png?imageMogr2%2Fthumbnail%2F%2196x96r%2Fgravity%2FCenter%2Fcrop%2F%2196x96%2Fquality%2F90"
+                    }
+                },
+                "busi_type": 2,
+                "id": 2464939198,
+                "timestamp": 1568903411
+            }
+        ]
+    }
+}
