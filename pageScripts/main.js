@@ -12,9 +12,9 @@ let ajax_interceptor_qoweifjqon = {
     const modifyResponse = () => {
       // 对比是否满足指定的规则
       [
-        {
-          match: "https://im.mafengwo.cn/admin/chat/message_post"
-        },
+        // {
+        //   match: "https://im.mafengwo.cn/admin/chat/message_post"
+        // },
         {
           match: "https://im.mafengwo.cn/admin/chat/polling"
         }
@@ -22,12 +22,11 @@ let ajax_interceptor_qoweifjqon = {
         if (match && this.responseURL.indexOf(match) > -1) {
           if (this.response) {
             // 继续判断是不是符合要求，比如某个字段
-            // let line_id = '';
-            // let  name = '';
-
-            // line_id = this.response.data.list[0].item.info.line_id;
-            // name = this.response.data.list[0].item.name;
-            debugger;
+            let responseJSON = JSON.parse(this.response);
+            
+            debugger
+            let line_id = responseJSON.data.list[0].item.info.line_id;
+            let name = responseJSON.data.list[0].item.name;
 
             // $.ajax({
             //   url: "https://im.mafengwo.cn/rest/im/event/",
@@ -61,28 +60,28 @@ let ajax_interceptor_qoweifjqon = {
             //   },
             //   fail: function() {}
             // });
-
-            // if(name === 'message_new'){
-            //   var replyT = setTimeout(function(){
-            //     $.ajax({
-            //       url: "https://im.mafengwo.cn/admin/chat/message_post",
-            //       method: "post",
-            //       data: {
-            //         line_id:line_id,
-            //         message:{
-            //           type:1,
-            //           content:{
-            //             text : '好的'
-            //           }
-            //         }
-            //       },
-            //       success: function(res) {
-            //         console.log(res);
-            //       },
-            //       fail: function() {}
-            //     });
-            //   },3000)
-            // }
+            debugger
+            if(name === 'message_new'){
+              var replyT = setTimeout(function(){
+                $.ajax({
+                  url: "https://im.mafengwo.cn/admin/chat/message_post",
+                  method: "post",
+                  data: {
+                    line_id:line_id,
+                    message:{
+                      type:1,
+                      content:{
+                        text : '(爱心)'
+                      }
+                    }
+                  },
+                  success: function(res) {
+                    console.log(res);
+                  },
+                  fail: function() {}
+                });
+              },3000)
+            }
           }
 
           if (!pageScriptEventDispatched) {
