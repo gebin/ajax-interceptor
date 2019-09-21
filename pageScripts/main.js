@@ -23,64 +23,72 @@ let ajax_interceptor_qoweifjqon = {
           if (this.response) {
             // 继续判断是不是符合要求，比如某个字段
             let responseJSON = JSON.parse(this.response);
-            
-            debugger
-            let line_id = responseJSON.data.list[0].item.info.line_id;
-            let name = responseJSON.data.list[0].item.name;
+            if(!responseJSON.data.list || responseJSON.data.list.length === 0){
+              return;
+            }
 
-            // $.ajax({
-            //   url: "https://im.mafengwo.cn/rest/im/event/",
-            //   method: "post",
-            //   data: {
-            //     update: {
-            //       e: "req.message.post",
-            //       b: {
-            //         message: {
-            //           type: 1,
-            //           to_uid: "484173610",
-            //           timestamp: new Date().getTime(),
-            //           content: {
-            //             text: "您好！"
-            //           },
-            //           prefix_id: new Date().getTime()
-            //         },
-            //         role: {
-            //           is_b: "1",
-            //           is_pc: "1"
-            //         },
-            //         t: new Date().getTime(),
-            //         v: "1.0"
-            //       }
-            //     },
-            //     post_style: "default",
-            //     after_style: "default"
-            //   },
-            //   success: function(res) {
-            //     console.log(res);
-            //   },
-            //   fail: function() {}
-            // });
-            debugger
-            if(name === 'message_new'){
-              var replyT = setTimeout(function(){
-                $.ajax({
-                  url: "https://im.mafengwo.cn/admin/chat/message_post",
-                  method: "post",
-                  data: {
-                    line_id:line_id,
-                    message:{
-                      type:1,
-                      content:{
-                        text : '(爱心)'
+            try{
+              debugger
+              let line_id = responseJSON.data.list[0].item.info.line_id;
+              let name = responseJSON.data.list[0].item.name;
+
+              // $.ajax({
+              //   url: "https://im.mafengwo.cn/rest/im/event/",
+              //   method: "post",
+              //   data: {
+              //     update: {
+              //       e: "req.message.post",
+              //       b: {
+              //         message: {
+              //           type: 1,
+              //           to_uid: "484173610",
+              //           timestamp: new Date().getTime(),
+              //           content: {
+              //             text: "您好！"
+              //           },
+              //           prefix_id: new Date().getTime()
+              //         },
+              //         role: {
+              //           is_b: "1",
+              //           is_pc: "1"
+              //         },
+              //         t: new Date().getTime(),
+              //         v: "1.0"
+              //       }
+              //     },
+              //     post_style: "default",
+              //     after_style: "default"
+              //   },
+              //   success: function(res) {
+              //     console.log(res);
+              //   },
+              //   error: function() {}
+              // });
+
+              if(name === 'message_new'){
+                setTimeout(function(){
+                  console.log(line_id);
+                  $.ajax({
+                    url: "https://im.mafengwo.cn/admin/chat/message_post",
+                    method: "post",
+                    data: {
+                      line_id:line_id,
+                      message:{
+                        type:1,
+                        content:{
+                          text : '(桃心小蜂)'
+                        }
                       }
-                    }
-                  },
-                  success: function(res) {
-                    console.log(res);
-                  },
-                  fail: function() {}
-                });
-              },3000)
+                    },
+                    success: function(res) {
+                      console.log(res);
+                    },
+                    error: function() {}
+                  });
+                },3000)
+              }
+            }catch(e){
+
             }
           }
 
