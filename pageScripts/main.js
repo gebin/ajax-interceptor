@@ -3,14 +3,21 @@ const POLLING_URLS = [
     {
         match: '//im.mafengwo.cn/admin/chat/polling',
         version: '2.0'
+    },{
+        match:'//im.mafengwo.cn/polling/event/',
+        version:'1.0'
     }
 ]
+
 // 发送回复消息
 const POST_MESSAGE_URLS = [
     {
         match: "//im.mafengwo.cn/admin/chat/message_post",
         version : "2.0"
-    },
+    },{
+        match:'//im.mafengwo.cn/rest/im/event/',
+        version : '1.0'
+    }
 ]
 
 window.userReplyMap = {};
@@ -35,7 +42,7 @@ let ajax_interceptor_qoweifjqon = {
                     if (this.response) {
                         // 继续判断是不是符合要求，比如某个字段
                         let responseJSON = JSON.parse(this.response);
-                        handleNewMessage(responseJSON,version)
+                        handleNewMessage(responseJSON,version,this.responseURL)
                     }
 
                     if (!pageScriptEventDispatched) {
@@ -174,7 +181,7 @@ window.addEventListener(
 );
 
 // 处理新消息
-function handleNewMessage(responseJSON,version){
+function handleNewMessage(responseJSON,version,responseUrl){
     if(version === '2.0'){
         try {
             if (!responseJSON.data.list || responseJSON.data.list.length === 0) {
@@ -198,6 +205,34 @@ function handleNewMessage(responseJSON,version){
             }
         } catch (e) {}
     }
+
+    if(version === '1.0'){
+        let timeout = null;
+        let arr = responseUrl.split('?');
+        arr = decodeURIComponent(arr[1]).split('&');
+
+        if(arr[0] === 'filter[e]=req.polling'){
+            let respList = responseJSON.data.list;
+            respList.forEach(function(item){
+                if(item.e === "res.user.refresh"){
+                    let user = item.b.user;
+                    let line_id = user.c_uid;
+
+                    timeout = setTimeout(function() {
+                        console.log(line_id);
+                        replyMessage1(line_id)
+                    }, window.replyTime);
+
+                    // 构建一个回复用户的timeout列表。
+                    if(userReplyMap[line_id]){
+                        timeout && (userReplyMap[line_id].push(timeout));
+                    } else {
+                        timeout && (userReplyMap[line_id] = [timeout]);
+                    }
+                }
+            })
+        }
+    }
 }
 
 // 检查回复列表中的数据
@@ -209,6 +244,7 @@ function checkReplyList(line_id){
 
     // 如果还有排队的，请删除
     replyList.forEach(function(item){
+        console.log('clearTimeout',item)
         clearTimeout(item);
     })
     window.userReplyMap[line_id] = [];
@@ -218,10 +254,7 @@ function checkReplyList(line_id){
 function replyMessage2(line_id,version){
     checkReplyList(line_id);
 
-    let url = '';
-    if(version === '2.0'){
-        url = POST_MESSAGE_URLS[0].match
-    }
+    let url = 'https://im.mafengwo.cn/admin/chat/message_post';
 
     $.ajax({
         url: url,
@@ -242,36 +275,42 @@ function replyMessage2(line_id,version){
     });
 }
 
+// 回复用户
+function replyMessage1(line_id,version){
+    checkReplyList(line_id);
 
-// $.ajax({
-//   url: "https://im.mafengwo.cn/rest/im/event/",
-//   method: "post",
-//   data: {
-//     update: {
-//       e: "req.message.post",
-//       b: {
-//         message: {
-//           type: 1,
-//           to_uid: "484173610",
-//           timestamp: new Date().getTime(),
-//           content: {
-//             text: "您好！"
-//           },
-//           prefix_id: new Date().getTime()
-//         },
-//         role: {
-//           is_b: "1",
-//           is_pc: "1"
-//         },
-//         t: new Date().getTime(),
-//         v: "1.0"
-//       }
-//     },
-//     post_style: "default",
-//     after_style: "default"
-//   },
-//   success: function(res) {
-//     console.log(res);
-//   },
-//   error: function() {}
-// });
+    let url = 'https://im.mafengwo.cn/rest/im/event/';
+
+    $.ajax({
+        url: url,
+        method: 'post',
+        data: {
+            update: {
+                e: 'req.message.post',
+                b: {
+                    message: {
+                        type: 1,
+                        to_uid: line_id,
+                        timestamp: Math.ceil(new Date().getTime()/1000),
+                        content: {
+                            text: window.replyText
+                        },
+                        prefix_id: new Date().getTime()
+                    },
+                    role: {
+                        is_b: '1',
+                        is_pc: '1'
+                    }
+                },
+                t: new Date().getTime(),
+                v: '1.0'
+            },
+            post_style: 'default',
+            after_style: 'default'
+        },
+        success: function(res) {
+            console.log(res);
+        },
+        error: function() {}
+    });
+}
