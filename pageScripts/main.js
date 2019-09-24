@@ -57,7 +57,18 @@ let ajax_interceptor_qoweifjqon = {
             });
 
             // 判断是否人工回复，如果回复成功，就清空所有的回复。
-            
+            POST_MESSAGE_URLS.forEach(({match, version}) => {
+                if (match && this.responseURL.indexOf(match) > -1) {
+                    if(this.response){
+                        try{
+                            let responseJSON = JSON.parse(this.response);
+                            handlePostMessage(responseJSON,version,this.responseURL);
+                        }catch(e){
+                            console.log(e)
+                        }
+                    }
+                }                
+            }); 
         };
 
         for (let attr in xhr) {
@@ -231,6 +242,32 @@ function handleNewMessage(responseJSON,version,responseUrl){
                     }
                 }
             })
+        }
+    }
+}
+
+function handlePostMessage(responseJSON,version,responseUrl){
+    if(version === '1.0'){
+        try{
+            if(responseJSON.errno === 0){
+                let line_id = responseJSON.data.after.b.message.to_uid;
+                let type = responseJSON.data.after.e;
+
+                if(type === 'res.message.post'){
+                    checkReplyList(line_id);
+                }
+            }
+        }catch(e){
+        }
+    }
+
+    if(version === '2.0'){
+        try{
+            if(responseJSON.errno === 0){
+                let line_id = responseJSON.data.line_id;
+                checkReplyList(line_id);
+            }
+        }catch(e){
         }
     }
 }
