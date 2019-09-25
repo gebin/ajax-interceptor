@@ -177,6 +177,15 @@ window.addEventListener(
     function(event) {
         const data = event.data;
         if (data.type === 'ajaxInterceptor' && data.to === 'pageScript') {
+            if(data.key === 'replyText'){
+                window.replyText = data.value;
+                return;
+            }
+            if(data.key === 'replyTime'){
+                window.replyTime = data.value * 1000;
+                return;
+            }
+
             ajax_interceptor_qoweifjqon.settings[data.key] = data.value;
         }
 
