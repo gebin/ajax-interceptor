@@ -21,8 +21,8 @@ const POST_MESSAGE_URLS = [
 ]
 
 window.userReplyMap = {};
-window.replyTime = 3000;
-window.replyText = '(桃心小蜂)';
+window.replyTime = localStorage.getItem('replyTime') || 3000 ;
+window.replyText = localStorage.getItem('replyText') || '(桃心小蜂)';
 
 // 命名空间
 let ajax_interceptor_qoweifjqon = {
@@ -179,10 +179,13 @@ window.addEventListener(
         if (data.type === 'ajaxInterceptor' && data.to === 'pageScript') {
             if(data.key === 'replyText'){
                 window.replyText = data.value;
+                localStorage.setItem('replyText',window.replyText);
                 return;
             }
+
             if(data.key === 'replyTime'){
                 window.replyTime = data.value * 1000;
+                localStorage.setItem('replyTime',window.replyTime);
                 return;
             }
 
@@ -234,12 +237,14 @@ function handleNewMessage(responseJSON,version,responseUrl){
         if(arr[0] === 'filter[e]=req.polling'){
             let respList = responseJSON.data.list;
             respList.forEach(function(item){
-                if(item.e === "res.user.refresh"){
-                    let user = item.b.user;
-                    let line_id = user.c_uid;
+                if(/* item.e === "res.user.refresh" || */ item.e === 'res.message.new'){
+                    // 记住 refresh获取uid的方式不同
+                    // let user = item.b.user;
+                    // let line_id = user.c_uid;
 
+                    let user = item.b.message.c_user;
+                    let line_id = user.uid;
                     timeout = setTimeout(function() {
-                        console.log(line_id);
                         replyMessage1(line_id)
                     }, window.replyTime);
 
@@ -326,6 +331,7 @@ function replyMessage1(line_id,version){
     checkReplyList(line_id);
 
     let url = 'https://im.mafengwo.cn/rest/im/event/';
+    console.log('开始回复用户：',line_id);
 
     $.ajax({
         url: url,
@@ -355,7 +361,8 @@ function replyMessage1(line_id,version){
             after_style: 'default'
         },
         success: function(res) {
-            console.log(res);
+            console.log('回复成功：',res);
+
         },
         error: function() {}
     });

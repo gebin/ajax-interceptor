@@ -63,25 +63,36 @@ export default class Main extends Component {
     componentWillMount() {
         let replyCurrentValue = null;
         let replyCurrentText = null;
+        let replyTime = null;
         let me = this;
-        chrome.storage && chrome.storage.local.get(['replyCurrentValue','replyText'],function(items){
+        chrome.storage && chrome.storage.local.get(['replyCurrentValue','replyText','replyTime'],function(items){
             replyCurrentValue = items.replyCurrentValue;
             replyCurrentText = items.replyText;
+            replyTime = items.replyTime;
                 
             console.log('items:',items)
-                
+
             if(replyCurrentValue){
-                me.setState({
+                let state = {
                     replyCurrentText,
-                    replyCurrentValue
+                    replyCurrentValue,
+                }
+
+                if(replyTime){
+                    state.replyTime = replyTime;
+                }
+
+                if(replyCurrentValue == 4){
+                    state.replyMoreText = replyCurrentText;
+                }
+
+                me.setState({
+                    ...state
+                },function(){
+                    // me.handleConfirm()
                 })
             }
 
-            if(replyCurrentValue == 4){
-                me.setState({
-                    replyMoreText:replyCurrentText
-                })
-            }
         })
     } 
 
@@ -170,6 +181,7 @@ export default class Main extends Component {
                     onChange={this.handleSwitchChange}
                 />
                 <div className="reply-list">
+                    回复内容
                     <Radio.Group onChange={this.handleReplyRadioChange} value={this.state.replyCurrentValue}>
                         {radioList}
                         <Radio style={radioStyle} value={4}>
@@ -180,7 +192,7 @@ export default class Main extends Component {
                         </Radio>
                     </Radio.Group>
                 </div>
-                <div>
+                <div className="reply-time">
                     回复时间 <Input value={this.state.replyTime}  onChange={this.handleReplyTimeChange} />
                 </div>
                 <Button type="primary" onClick={this.handleConfirm}>确定</Button>
