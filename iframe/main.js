@@ -42,8 +42,8 @@ export default class Main extends Component {
     }
 
     state = {
-        replyCurrentValue : 0,
-        replyCurrentText: '',
+        replyCurrentValue : 1,
+        replyCurrentText: '(桃心小蜂)',
 
         replyMoreText : '',
         replyTime:3,
