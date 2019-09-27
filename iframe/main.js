@@ -57,20 +57,28 @@ export default class Main extends Component {
         },{
             replyValue:3,
             replyText:'客服暂时离开一小会，请您耐心等待，5-10分钟内尽快给您回复噢'
-        },]
+        },],
+
+        isImpownerUser: false // 是否是授权用户
     };
 
     componentWillMount() {
         let replyCurrentValue = null;
         let replyCurrentText = null;
         let replyTime = null;
+        let code = null;
         let me = this;
-        chrome.storage && chrome.storage.local.get(['replyCurrentValue','replyText','replyTime'],function(items){
+        chrome.storage && chrome.storage.local.get(['replyCurrentValue','replyText','replyTime','code'],function(items){
             replyCurrentValue = items.replyCurrentValue;
             replyCurrentText = items.replyText;
             replyTime = items.replyTime;
+            code  = items.code;
                 
-            console.log('items:',items)
+            if(code === '1s1sljj'){
+                me.setState({
+                    isImpownerUser : true
+                })
+            }
 
             if(replyCurrentValue){
                 let state = {
@@ -105,7 +113,6 @@ export default class Main extends Component {
             key,
             value
         });
-        console.log(chrome.storage)
         chrome.storage && chrome.storage.local.set({[key]: value});
     };
  
@@ -145,7 +152,6 @@ export default class Main extends Component {
 
     // 其他文案的失焦处理
     handleMoreTextBlur = (e) => {
-        console.log(this.state.replyCurrentText,this.state.replyCurrentValue)
     }
 
     handleConfirm =()=>{
@@ -159,6 +165,23 @@ export default class Main extends Component {
         this.setState({
             replyTime: e.target.value
         });
+    }
+
+    handlePassword = (e) =>{
+        this.setState({
+            code: e.target.value
+        });
+    }
+
+    handleLogin = () =>{
+        if(this.state.code === '1s1sljj'){
+            chrome.storage && chrome.storage.local.set({['code']: '1s1sljj'});
+            this.setState({
+                isImpownerUser : true
+            })
+        } else {
+            message.warn('请输入正确的密码！')
+        }
     }
     
     render() {
@@ -176,27 +199,36 @@ export default class Main extends Component {
 
         return (
             <div className="main">
-                <Switch
-                    style={{zIndex: 10}}
-                    defaultChecked={window.setting.ajaxInterceptor_switchOn}
-                    onChange={this.handleSwitchChange}
-                />
-                <div className="reply-list">
-                    回复内容
-                    <Radio.Group onChange={this.handleReplyRadioChange} value={this.state.replyCurrentValue}>
-                        {radioList}
-                        <Radio style={radioStyle} value={4}>
-                            其他
-                            {this.state.replyCurrentValue === 4 ? (
-                                <Input style={{width: 100, marginLeft: 10}} value={this.state.replyMoreText} onChange={this.handleMoreTextChange} onBlur={this.handleMoreTextBlur}/>
-                            ) : null}
-                        </Radio>
-                    </Radio.Group>
-                </div>
-                <div className="reply-time">
-                    回复时间 <Input value={this.state.replyTime}  onChange={this.handleReplyTimeChange} />
-                </div>
-                <Button type="primary" onClick={this.handleConfirm}>确定</Button>
+                {this.state.isImpownerUser ? (
+                    <div>
+                        <Switch
+                            style={{zIndex: 10}}
+                            defaultChecked={window.setting.ajaxInterceptor_switchOn}
+                            onChange={this.handleSwitchChange}
+                        />
+                        <div className="reply-list">
+                            回复内容
+                            <Radio.Group onChange={this.handleReplyRadioChange} value={this.state.replyCurrentValue}>
+                                {radioList}
+                                <Radio style={radioStyle} value={4}>
+                                    其他
+                                    {this.state.replyCurrentValue === 4 ? (
+                                        <Input style={{width: 100, marginLeft: 10}} value={this.state.replyMoreText} onChange={this.handleMoreTextChange} onBlur={this.handleMoreTextBlur}/>
+                                    ) : null}
+                                </Radio>
+                            </Radio.Group>
+                        </div>
+                        <div className="reply-time">
+                            回复时间 <Input value={this.state.replyTime}  onChange={this.handleReplyTimeChange} />
+                        </div>
+                        <Button type="primary" onClick={this.handleConfirm}>确定</Button>
+                    </div>) : (
+                        <div>
+                            <Input type="password" onChange={this.handlePassword}/>
+                            <Button onClick={this.handleLogin}>确定</Button>
+                        </div>
+                    )
+                }
             </div>
         );
     }
