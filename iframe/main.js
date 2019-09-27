@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import 'antd/dist/antd.css';
-import {Switch, Input, Radio, Button} from 'antd';
+import {Switch, Input, Radio, Button,message} from 'antd';
 
 import './Main.less';
 
@@ -152,6 +152,7 @@ export default class Main extends Component {
         chrome.storage && chrome.storage.local.set({['replyCurrentValue']: this.state.replyCurrentValue});
         this.set('replyText',this.state.replyCurrentText)
         this.set('replyTime',this.state.replyTime)
+        message.success('保存成功！');
     }
 
     handleReplyTimeChange = (e) =>{
