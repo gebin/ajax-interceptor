@@ -1,6 +1,6 @@
 {
-  "name": "Ajax Interceptor",
-  "version": "0.6",
+  "name": "马蜂窝自动回复",
+  "version": "0.2",
   "description": "To modify response text of ajax requests",
   "permissions": [
     "declarativeContent",

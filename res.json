@@ -501,3 +501,32 @@
         }
     ]
 }
+
+// https://im.mafengwo.cn/rest/im/event/
+// filter[e]: req.b.group
+// filter[b][role][is_b]: 1
+// filter[b][role][is_pc]: 1
+// filter[t]: 1569496932
+// filter[v]: 1.0
+
+{
+    "errno": 0,
+    "error": 0,
+    "data": {
+      "list": [
+        {
+          "t": 1569496932,
+          "v": "1.0",
+          "e": "res.b.group",
+          "b": {
+            "user": [
+              {
+                "group_id": 32555,
+                "name": "一起走-79576"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }

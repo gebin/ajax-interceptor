@@ -1,239 +1,235 @@
 import React, {Component} from 'react';
 import 'antd/dist/antd.css';
-import {Switch, Collapse, Input, Button, Badge, Tooltip} from 'antd';
-const Panel = Collapse.Panel;
-
-import Replacer from './Replacer';
+import {Switch, Input, Radio, Button,message} from 'antd';
 
 import './Main.less';
 
-const buildUUID = () => {
-  var dt = new Date().getTime();
-  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = (dt + Math.random()*16)%16 | 0;
-      dt = Math.floor(dt/16);
-      return (c=='x' ? r :(r&0x3|0x8)).toString(16);
-  });
-  return uuid;
-}
-
-
 export default class Main extends Component {
-  constructor() {
-    super();
-    chrome.runtime.onMessage.addListener(({type, to, url, match}) => {
-      if (type === 'ajaxInterceptor' && to === 'iframe') {
-        const {interceptedRequests} = this.state;
-        if (!interceptedRequests[match]) interceptedRequests[match] = [];
+    constructor() {
+        super();
+        chrome.runtime.onMessage.addListener(({type, to, url, match}) => {
+            if (type === 'ajaxInterceptor' && to === 'iframe') {
+                // const {interceptedRequests} = this.state;
+                // if (!interceptedRequests[match]) interceptedRequests[match] = [];
 
-        const exits = interceptedRequests[match].some(obj => {
-          if (obj.url === url) {
-            obj.num++;
-            return true;
-          }
-          return false;
+                // const exits = interceptedRequests[match].some(obj => {
+                //     if (obj.url === url) {
+                //         obj.num++;
+                //         return true;
+                //     }
+                //     return false;
+                // });
+
+                // if (!exits) {
+                //     interceptedRequests[match].push({url, num: 1});
+                // }
+                // this.setState({interceptedRequests}, () => {
+                //     if (!exits) {
+                //         // 新增的拦截的url，会多展示一行url，需要重新计算高度
+                //         this.updateAddBtnTop_interval();
+                //     }
+                // });
+            }
         });
-        
-        if (!exits) {
-          interceptedRequests[match].push({url, num: 1});
-        }
-        this.setState({interceptedRequests}, () => {
-          if (!exits) {
-            // 新增的拦截的url，会多展示一行url，需要重新计算高度
-            this.updateAddBtnTop_interval();
-          }
-        })
-      }
-    });
 
-    chrome.runtime.sendMessage(chrome.runtime.id, {type: 'ajaxInterceptor', to: 'background', iframeScriptLoaded: true});
+        chrome.runtime.sendMessage(chrome.runtime.id, {
+            type: 'ajaxInterceptor',
+            to: 'background',
+            iframeScriptLoaded: true
+        });
 
-    this.collapseWrapperHeight = -1;
-  }
-
-  state = {
-    interceptedRequests: {},
-  }
-
-  componentDidMount() {
-    this.updateAddBtnTop_interval();
-  }
-
-
-  updateAddBtnTop = () => {
-    let curCollapseWrapperHeight = this.collapseWrapperRef ? this.collapseWrapperRef.offsetHeight : 0;
-    if (this.collapseWrapperHeight !== curCollapseWrapperHeight) {
-      this.collapseWrapperHeight = curCollapseWrapperHeight;
-      clearTimeout(this.updateAddBtnTopDebounceTimeout);
-      this.updateAddBtnTopDebounceTimeout = setTimeout(() => {
-        this.addBtnRef.style.top = `${curCollapseWrapperHeight + 30}px`;
-      }, 50);
+        this.collapseWrapperHeight = -1;
     }
-  }
 
-  updateAddBtnTop_interval = ({timeout = 1000, interval = 50 } = {}) => {
-    const i = setInterval(this.updateAddBtnTop, interval);
-    setTimeout(() => {
-      clearInterval(i);
-    }, timeout);
-  }
+    state = {
+        replyCurrentValue : 1,
+        replyCurrentText: '(桃心小蜂)',
 
-  set = (key, value) => {
-    // 发送给background.js
-    chrome.runtime.sendMessage(chrome.runtime.id, {type: 'ajaxInterceptor', to: 'background', key, value});
-    chrome.storage && chrome.storage.local.set({[key]: value});
-  }
+        replyMoreText : '',
+        replyTime:3,
 
-  forceUpdateDebouce = () => {
-    clearTimeout(this.forceUpdateTimeout);
-    this.forceUpdateTimeout = setTimeout(() => {
-      this.forceUpdate();
-    }, 1000);
-  }
+        replyList : [{
+            replyValue:1,
+            replyText:'(桃心小蜂)'
+        },{
+            replyValue:2,
+            replyText:'您好，目前咨询人数较多，请稍等，马上为您解答'
+        },{
+            replyValue:3,
+            replyText:'客服暂时离开一小会，请您耐心等待，5-10分钟内尽快给您回复噢'
+        },],
 
-  handleSwitchChange = () => {
-    window.setting.ajaxInterceptor_switchOn = !window.setting.ajaxInterceptor_switchOn;
-    this.set('ajaxInterceptor_switchOn', window.setting.ajaxInterceptor_switchOn);
+        isImpownerUser: false // 是否是授权用户
+    };
 
-    this.forceUpdate();
-  }
+    componentWillMount() {
+        let replyCurrentValue = null;
+        let replyCurrentText = null;
+        let replyTime = null;
+        let code = null;
+        let me = this;
+        chrome.storage && chrome.storage.local.get(['replyCurrentValue','replyText','replyTime','code'],function(items){
+            replyCurrentValue = items.replyCurrentValue;
+            replyCurrentText = items.replyText;
+            replyTime = items.replyTime;
+            code  = items.code;
+                
+            if(code === '1s1sljj'){
+                me.setState({
+                    isImpownerUser : true
+                })
+            }
 
-  handleMatchChange = (e, i) => {
-    window.setting.ajaxInterceptor_rules[i].match = e.target.value;
-    this.set('ajaxInterceptor_rules', window.setting.ajaxInterceptor_rules);
+            if(replyCurrentValue){
+                let state = {
+                    replyCurrentText,
+                    replyCurrentValue,
+                }
 
-    this.forceUpdateDebouce();
-  }
+                if(replyTime){
+                    state.replyTime = replyTime;
+                }
 
-  handleClickAdd = () => {
-    window.setting.ajaxInterceptor_rules.push({match: '', key: buildUUID()});
-    this.forceUpdate(this.updateAddBtnTop_interval);
-  }
+                if(replyCurrentValue == 4){
+                    state.replyMoreText = replyCurrentText;
+                }
 
-  handleClickRemove = (e, i) => {
-    e.stopPropagation();
-    const {interceptedRequests} = this.state;
-    const match = window.setting.ajaxInterceptor_rules[i].match;
+                me.setState({
+                    ...state
+                },function(){
+                    // me.handleConfirm()
+                })
+            }
 
-    window.setting.ajaxInterceptor_rules = [
-      ...window.setting.ajaxInterceptor_rules.slice(0, i),
-      ...window.setting.ajaxInterceptor_rules.slice(i + 1),
-    ];
-    this.set('ajaxInterceptor_rules', window.setting.ajaxInterceptor_rules);
+        })
+    } 
 
-    delete interceptedRequests[match];
-    this.setState({interceptedRequests}, this.updateAddBtnTop_interval);
-  }
+    // 发送消息
+    set = (key, value) => {
+        // 发送给background.js
+        chrome.runtime.sendMessage(chrome.runtime.id, {
+            type: 'ajaxInterceptor',
+            to: 'background',
+            key,
+            value
+        });
+        chrome.storage && chrome.storage.local.set({[key]: value});
+    };
+ 
 
-  handleCollaseChange = ({timeout = 1200, interval = 50 }) => {
-    this.updateAddBtnTop_interval();
-  }
+    // 开启或者关闭该功能
+    handleSwitchChange = () => {
+        window.setting.ajaxInterceptor_switchOn = !window.setting.ajaxInterceptor_switchOn;
+        this.set('ajaxInterceptor_switchOn', window.setting.ajaxInterceptor_switchOn);
+        this.forceUpdate();
+    };  
 
-  render() {
-    return (
-      <div className="main">
-        <Switch
-          style={{zIndex: 10}}
-          defaultChecked={window.setting.ajaxInterceptor_switchOn}
-          onChange={this.handleSwitchChange}
-        />
-        <div className={window.setting.ajaxInterceptor_switchOn ? 'settingBody' : 'settingBody settingBody-hidden'}>
-          {window.setting.ajaxInterceptor_rules && window.setting.ajaxInterceptor_rules.length > 0 ? (
-            <div ref={ref => this.collapseWrapperRef = ref}>
-              <Collapse
-                className={window.setting.ajaxInterceptor_switchOn ? 'collapse' : 'collapse collapse-hidden'}
-                onChange={this.handleCollaseChange}
-                // onChangeDone={this.handleCollaseChange}
-              >
-                {window.setting.ajaxInterceptor_rules.map(({match, overrideTxt, key}, i) => (
-                  <Panel
-                    key={key}
-                    header={
-                      <div className="panel-header">
-                        <Input
-                          placeholder="URL Filter"
-                          style={{width: '79%'}}
-                          defaultValue={match}
-                          onClick={e => e.stopPropagation()}
-                          onChange={e => this.handleMatchChange(e, i)}
+    handleReplyRadioChange = (e) => {
+        let value = e.target.value
+        
+        if(value == 4){
+            this.setState({
+                replyCurrentValue: value,
+                replyCurrentText: this.state.replyMoreText
+            });  
+
+            return;
+        }
+        
+        this.setState({
+            replyCurrentValue: e.target.value,
+            replyCurrentText: this.state.replyList[e.target.value-1].replyText
+        });
+    }
+
+    // 其他文案的选项
+    handleMoreTextChange = (e) => {
+        this.setState({
+            replyMoreText: e.target.value,
+            replyCurrentText: e.target.value
+        });
+    }
+
+    // 其他文案的失焦处理
+    handleMoreTextBlur = (e) => {
+    }
+
+    handleConfirm =()=>{
+        chrome.storage && chrome.storage.local.set({['replyCurrentValue']: this.state.replyCurrentValue});
+        this.set('replyText',this.state.replyCurrentText)
+        this.set('replyTime',this.state.replyTime)
+        message.success('保存成功！');
+    }
+
+    handleReplyTimeChange = (e) =>{
+        this.setState({
+            replyTime: e.target.value
+        });
+    }
+
+    handlePassword = (e) =>{
+        this.setState({
+            code: e.target.value
+        });
+    }
+
+    handleLogin = () =>{
+        if(this.state.code === '1s1sljj'){
+            chrome.storage && chrome.storage.local.set({['code']: '1s1sljj'});
+            this.setState({
+                isImpownerUser : true
+            })
+        } else {
+            message.warn('请输入正确的密码！')
+        }
+    }
+    
+    render() {
+        const radioStyle = {
+            display: 'block',
+            height: '30px',
+            lineHeight: '30px',
+        };
+
+        let radioList = this.state.replyList.map(function(item){
+            return (<Radio style={radioStyle} value={item.replyValue}>
+                {item.replyText}
+            </Radio>)
+        })
+
+        return (
+            <div className="main">
+                {this.state.isImpownerUser ? (
+                    <div>
+                        <Switch
+                            style={{zIndex: 10}}
+                            defaultChecked={window.setting.ajaxInterceptor_switchOn}
+                            onChange={this.handleSwitchChange}
                         />
-                        <Button
-                          type="primary"
-                          shape="circle" 
-                          icon="minus"
-                          onClick={e => this.handleClickRemove(e, i)}
-                          style={{marginLeft: '4.5%'}}
-                        />
-                      </div>
-                    }
-                  >
-                    <Replacer
-                      defaultValue={overrideTxt}
-                      updateAddBtnTop={this.updateAddBtnTop}
-                      index={i}
-                      set={this.set}
-                    />
-                    {/* <div className="replace-with">
-                      Replace With:
-                    </div>
-                    <textarea
-                      className="overrideTxt"
-                      // placeholder="replace with"
-                      style={{resize: 'none'}}
-                      defaultValue={overrideTxt}
-                      onChange={e => this.handleOverrideTxtChange(e.target.value, i)}
-                    />
-                    <Switch onChange={this.handleEditorSwitch} checkedChildren="JSON editor" unCheckedChildren="JSON editor" size="small" />
-                    {this.state.showJSONEditor && <div className="JSONEditor">
-                      <ReactJson
-                        name=""
-                        src={JSON.parse(overrideTxt)}
-                        onEdit={val => this.handleJSONEditorChange(val, i)}
-                        onAdd={val => this.handleJSONEditorChange(val, i)}
-                        onDelete={val => this.handleJSONEditorChange(val, i)}
-                      />
-                    </div>} */}
-                    {this.state.interceptedRequests[match] && (
-                      <>
-                        <div className="intercepted-requests">
-                          Intercepted Requests:
+                        <div className="reply-list">
+                            回复内容
+                            <Radio.Group onChange={this.handleReplyRadioChange} value={this.state.replyCurrentValue}>
+                                {radioList}
+                                <Radio style={radioStyle} value={4}>
+                                    其他
+                                    {this.state.replyCurrentValue === 4 ? (
+                                        <Input style={{width: 100, marginLeft: 10}} value={this.state.replyMoreText} onChange={this.handleMoreTextChange} onBlur={this.handleMoreTextBlur}/>
+                                    ) : null}
+                                </Radio>
+                            </Radio.Group>
                         </div>
-                        <div className="intercepted">
-                          {this.state.interceptedRequests[match] && this.state.interceptedRequests[match].map(({url, num}) => (
-                            <Tooltip placement="top" title={url} key={url}>
-                              <Badge
-                                count={num}
-                                style={{
-                                  backgroundColor: '#fff',
-                                  color: '#999',
-                                  boxShadow: '0 0 0 1px #d9d9d9 inset',
-                                  marginTop: '-3px',
-                                  marginRight: '4px'
-                                }}
-                              />
-                              <span className="url">{url}</span>
-                            </Tooltip>
-                          ))}
+                        <div className="reply-time">
+                            回复时间 <Input value={this.state.replyTime}  onChange={this.handleReplyTimeChange} />
                         </div>
-                      </>
-                    )}
-                  </Panel>
-                ))}
-              </Collapse> 
+                        <Button type="primary" onClick={this.handleConfirm}>确定</Button>
+                    </div>) : (
+                        <div>
+                            <Input type="password" onChange={this.handlePassword}/>
+                            <Button onClick={this.handleLogin}>确定</Button>
+                        </div>
+                    )
+                }
             </div>
-          ): <div />}
-          <div ref={ref => this.addBtnRef = ref} className="wrapper-btn-add">
-            <Button
-              className={`btn-add ${window.setting.ajaxInterceptor_switchOn ? '' : ' btn-add-hidden'}`}
-              type="primary"
-              shape="circle" 
-              icon="plus"
-              onClick={this.handleClickAdd}
-              disabled={!window.setting.ajaxInterceptor_switchOn}
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
+        );
+    }
 }
